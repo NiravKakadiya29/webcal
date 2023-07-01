@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Golden Ratio Calculator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    :root {
+      --golden-ratio: 1.618;
+      --font-family: 'Poppins', sans-serif;
+      --primary-color: #f3f4f6;
+      --secondary-color: #d1d5db;
+      --dark-color: #1f2937;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: var(--primary-color);
+      font-family: var(--font-family);
+    }
+
+    .calculator {
+      width: calc(300px * var(--golden-ratio));
+      padding: calc(20px * var(--golden-ratio));
+      border-radius: calc(20px * var(--golden-ratio));
+      box-shadow: calc(10px * var(--golden-ratio)) calc(10px * var(--golden-ratio)) calc(20px * var(--golden-ratio)) rgba(0, 0, 0, 0.1), calc(-10px * var(--golden-ratio)) calc(-10px * var(--golden-ratio)) calc(20px * var(--golden-ratio)) rgba(255, 255, 255, 0.5);
+      background-color: var(--primary-color);
+      font-size: calc(20px * var(--golden-ratio));
+    }
+
+    #result {
+      width: 100%;
+      padding: calc(10px * var(--golden-ratio));
+      margin-bottom: calc(10px * var(--golden-ratio));
+      border: none;
+      border-radius: calc(10px * var(--golden-ratio));
+      background-color: var(--secondary-color);
+      font-size: calc(24px * var(--golden-ratio));
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: calc(10px * var(--golden-ratio));
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(15px * var(--golden-ratio));
+      border: none;
+      border-radius: calc(10px * var(--golden-ratio));
+      background-color: var(--secondary-color);
+      color: var(--dark-color);
+      font-size: calc(18px * var(--golden-ratio));
+      cursor: pointer;
+      box-shadow: calc(6px * var(--golden-ratio)) calc(6px * var(--golden-ratio)) calc(10px * var(--golden-ratio)) rgba(0, 0, 0, 0.1), calc(-6px * var(--golden-ratio)) calc(-6px * var(--golden-ratio)) calc(10px * var(--golden-ratio)) rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: var(--dark-color);
+      color: var(--primary-color);
+      box-shadow: calc(4px * var(--golden-ratio)) calc(4px * var(--golden-ratio)) calc(6px * var(--golden-ratio)) rgba(0, 0, 0, 0.1), calc(-4px * var(--golden-ratio)) calc(-4px * var(--golden-ratio)) calc(6px * var(--golden-ratio)) rgba(255, 255, 255, 0.5);
+    }
+
+    .button:active {
+      background-color: var(--dark-color);
+      color: var(--primary-color);
+      box-shadow: inset calc(4px * var(--golden-ratio)) calc(4px * var(--golden-ratio)) calc(6px * var(--golden-ratio)) rgba(0, 0, 0, 0.1), inset calc(-4px * var(--golden-ratio)) calc(-4px * var(--golden-ratio)) calc(6px * var(--golden-ratio)) rgba(255, 255, 255, 0.5);
+    }
+
+    .button.full {
+      grid-column: 1 / span 2;
+    }
+
+    .button.operator {
+      background-color: var(--dark-color);
+      color: var(--primary-color);
+    }
+
+    .button.operator:hover {
+      background-color: #4b5563;
+    }
+
+    .button.operator:active {
+      background-color: #374151;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="result" readonly>
+    <div class="buttons">
+      <button class="button full" onclick="clearAll()">AC</button>
+      <button class="button" onclick="clearResult()">C</button>
+      <button class="button" onclick="deleteLastCharacter()">&#9003;</button>
+      <button class="button operator" onclick="appendToResult('/')">/</button>
+      <button class="button" onclick="appendToResult('7')">7</button>
+      <button class="button" onclick="appendToResult('8')">8</button>
+      <button class="button" onclick="appendToResult('9')">9</button>
+      <button class="button operator" onclick="appendToResult('*')">*</button>
+      <button class="button" onclick="appendToResult('4')">4</button>
+      <button class="button" onclick="appendToResult('5')">5</button>
+      <button class="button" onclick="appendToResult('6')">6</button>
+      <button class="button operator" onclick="appendToResult('-')">-</button>
+      <button class="button" onclick="appendToResult('1')">1</button>
+      <button class="button" onclick="appendToResult('2')">2</button>
+      <button class="button" onclick="appendToResult('3')">3</button>
+      <button class="button operator" onclick="appendToResult('+')">+</button>
+      <button class="button" onclick="appendToResult('0')">0</button>
+      <button class="button" onclick="appendToResult('.')">.</button>
+      <button class="button" onclick="calculateResult()">=</button>
+    </div>
+  </div>
+
+  <script>
+    let result = document.getElementById("result");
+
+    function appendToResult(value) {
+      result.value += value;
+    }
+
+    function clearResult() {
+      result.value = "";
+    }
+
+    function deleteLastCharacter() {
+      result.value = result.value.slice(0, -1);
+    }
+
+    function calculateResult() {
+      try {
+        result.value = eval(result.value);
+      } catch (error) {
+        result.value = "Error";
+      }
+    }
+
+    function clearAll() {
+      clearResult();
+    }
+  </script>
+</body>
+</html>
